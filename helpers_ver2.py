@@ -1,9 +1,10 @@
+# ======= Packages ========
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-
+# ======= Functions ========
 # this function check vakues for each column of the dataFrame
 def check_values_count(data): 
     for column in data:
@@ -25,6 +26,7 @@ def map_columns(data, column, dict_costum = False , map_dict = None):
 
 # this function plots all features according to user define plot object
 def plot_dataset(data, plot_object, object_name):
+    data = data.copy(deep=True)
     fig, axs = plt.subplots(2, 4, figsize = (22.0, 16.0))
     i, j = (0, 0)
     for column in tqdm(data.columns):
