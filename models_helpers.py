@@ -16,11 +16,27 @@ from sklearn.utils import resample
 from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
-# ====== Functions =======
 
-# this function evaluated the model preformance
+# ====== Functions =======
 def model_evaluation(y_true, y_pred):
-    
+    """Evaluate the ML model according to different metrics
+
+
+    Parameters
+    ----------
+
+    y_true: Data structure containing the true labels of the examples
+    y_pred: Data structure containing the prediction of the ML model
+
+
+    Returns
+    -------
+
+    None
+
+
+    """
+
     metric_table = PrettyTable()
     metric_table.field_names = ['Metric', 'Score']
     metric_table.add_row(['accuracy', accuracy_score(y_true, y_pred)])
@@ -33,10 +49,28 @@ def model_evaluation(y_true, y_pred):
     disp.plot()
     disp.ax_.set_xticklabels(['negative','positive'])
     disp.ax_.set_yticklabels(['negative','positive'])
-    
 
-# splits the data to train and training sets (------------need to have the option for creating a validation set---------)
+
 def data_split(dataset:DataFrame ,n_splits=1, test_size=0.2, train_size=0.8):
+    """ split the data into train and test (or train and validation)
+
+
+    Parameters
+    ----------
+
+    dataset: A pandas Dataframe to split
+    n_splits: (optional) An integer of number of splits
+    test_size: (optional) An inegeger for the propotion of the test set
+    train_size: (optional) An inegeger for the propotion of the train set
+
+
+    Returns
+    -------
+    
+    X_train, y_train, X_test, y_test
+
+
+    """
     
     spliter = StratifiedShuffleSplit(n_splits=n_splits, test_size=test_size, train_size=train_size)
     X = dataset.drop(dataset.columns[-1], axis=1)
@@ -49,6 +83,24 @@ def data_split(dataset:DataFrame ,n_splits=1, test_size=0.2, train_size=0.8):
     
 
 def up_down_sampling(X_train: DataFrame, y_train: DataFrame, ratio: int, up: bool):
+    """up/down sample a dataset
+
+
+    Parameters
+    ----------
+
+    X_train: A pandas DataFrame of the the train data without the labels
+    y_train: A pandas DataFrame of the labels of the training data
+    ratio: An integer for seting the proportion on the minority related to the majority
+    up: A bool determine up sampling or down sampling
+    
+
+    Returns
+    -------
+    The upsampled X_train and y_train
+
+
+    """
     
     X = pd.concat([X_train, y_train], axis=1)
     

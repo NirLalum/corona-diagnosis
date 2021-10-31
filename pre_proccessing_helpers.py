@@ -4,9 +4,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+
 # ======= Functions ========
-# this function check vakues for each column of the dataFrame
-def check_values_count(data): 
+def check_values_count(data):
+    """Use pandas value_counts function for each column in the Dataframe
+
+
+    Parameters
+    ----------
+
+    data: A pandas DataFrame
+
+
+    Returns
+    -------
+
+    None
+
+
+    """
+
     for column in data:
         if column == 'test_date':
             continue
@@ -14,9 +31,27 @@ def check_values_count(data):
         print(f"the different values for {column}:\n {count} \n")
 
 
-# this function maps values for given dataset, column name and dictionary
-# dict_costum is a boolean: True - dict is given from user else default dict 
 def map_columns(data, column, dict_costum = False , map_dict = None):
+    """Map values for given dataset, column name and dictionary
+    
+
+    Parameters
+    ----------
+
+    data: A pandas DataFrame
+    column: A string for the column name of the column to map
+    dict_costum: A bool to determine if the dict is user defined or not
+    map_dict: A dictionary supplied by the user (defined the mapping)
+    
+
+    Returns
+    -------
+
+    None
+
+
+    """
+
     if dict_costum:
         data[column] = data[column].map(map_dict)
     else:
@@ -26,6 +61,25 @@ def map_columns(data, column, dict_costum = False , map_dict = None):
 
 # this function plots all features according to user define plot object
 def plot_dataset(data, plot_object, object_name):
+    """Plot the data according to given plot object
+
+
+    Parameters
+    ----------
+
+    data: A pandas DataFrame 
+    plot_object: An object for plotting
+    object_name: A string for the object's name
+    
+
+    Return
+    ------
+    
+    None
+
+
+    """
+
     data = data.copy(deep=True)
     fig, axs = plt.subplots(2, 4, figsize = (22.0, 16.0))
     i, j = (0, 0)
