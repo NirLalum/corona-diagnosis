@@ -59,7 +59,6 @@ def map_columns(data, column, dict_costum = False , map_dict = None):
         data[column] = data[column].map(dict_def)
 
 
-# this function plots all features according to user define plot object
 def plot_dataset(data, plot_object, object_name):
     """Plot the data according to given plot object
 
