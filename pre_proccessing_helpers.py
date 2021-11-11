@@ -89,7 +89,8 @@ def plot_dataset(data, plot_object, object_name):
         ax = axs[i,j]
     
         if object_name == 'countplot':
-            plot_object(x=column, data=data, ax=ax)
+            ax = plot_object(x=column, data=data, ax=ax)
+            ax.bar_label(ax.containers[0], padding=1)
         if object_name == 'barplot':
             plot_object(x=column, y='corona_result',data=data, ax=ax)
         

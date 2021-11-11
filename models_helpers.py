@@ -13,7 +13,7 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.utils import resample
 
 # ---- evaluation ------
-from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score
+from sklearn.metrics import accuracy_score, f1_score, fbeta_score, recall_score, precision_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
@@ -41,8 +41,10 @@ def model_evaluation(y_true, y_pred):
     metric_table.field_names = ['Metric', 'Score']
     metric_table.add_row(['accuracy', accuracy_score(y_true, y_pred)])
     metric_table.add_row(['recall', recall_score(y_true, y_pred)])
-    metric_table.add_row(['f1 score', f1_score(y_true, y_pred)])
     metric_table.add_row(['presicion', precision_score(y_true, y_pred)])
+    metric_table.add_row(['f1 score', f1_score(y_true, y_pred)])
+    metric_table.add_row(['f_beta score', fbeta_score(y_true, y_pred, beta=2)]) # recall is more important
+    
     print(metric_table)
 
     disp = ConfusionMatrixDisplay(confusion_matrix(y_true, y_pred))
